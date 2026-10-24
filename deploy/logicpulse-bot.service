@@ -1,0 +1,27 @@
+[Unit]
+Description=LogicPulse Telegram Bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=logicpulse-bot
+Group=logicpulse-bot
+WorkingDirectory=/opt/logicpulse-bot/LogicPulse_Bot
+EnvironmentFile=/opt/logicpulse-bot/LogicPulse_Bot/.env
+Environment=PYTHONUNBUFFERED=1
+Environment=TZ=Europe/Moscow
+ExecStart=/opt/logicpulse-bot/venv/bin/python /opt/logicpulse-bot/LogicPulse_Bot/main.py
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=30
+KillSignal=SIGTERM
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=true
+ProtectSystem=strict
+ReadWritePaths=/opt/logicpulse-bot/LogicPulse_Bot
+
+[Install]
+WantedBy=multi-user.target
